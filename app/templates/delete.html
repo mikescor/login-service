@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Delete an user</h1>
+    <h2>List of users: </h2>
+    <ul>
+        {% for user in users %}
+        <li>{{ user.username }}</li>
+        {% endfor %}
+    </ul>
+    {% if prev_url %}
+    <a href="{{ prev_url }}">Prev users</a>
+    {% endif %}
+    {% if next_url %}
+    <a href="{{ next_url }}">Next users</a>
+    {% endif %}
+    <hr>
+    <form method="post">
+      <input type="text" name="username">
+      <input type="submit" value="Delete">
+    </form>
+{% endblock %}
