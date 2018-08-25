@@ -23,6 +23,10 @@ $ git clone https://github.com/mikescor/login-service
 ```
 ##### Note
 [Info about postgresql](https://www.postgresql.org/docs/10/static/manage-ag-createdb.html)
+* *Apply migrations:*
+```
+(venv) ~/login-service $ flask db upgrade
+```
 * *Finnaly, run the app*
 ```
 (venv) ~/login-service $ flask run
