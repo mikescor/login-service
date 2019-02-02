@@ -2,9 +2,12 @@ from flask import render_template, flash, redirect, url_for, request, session
 from flask_login import current_user, login_user, login_required, logout_user
 from werkzeug.urls import url_parse
 
-from app import app, db
+from app import create_app, db
 from app.forms import LoginForm, RegistrationForm
-from app.models import User
+from app.models import User, Post
+
+
+app = create_app()
 
 
 @app.route('/')
@@ -55,7 +58,8 @@ def registration():
 @login_required
 def user(username):
     user = User.query.filter_by(username=username).first_or_404()
-    return render_template('user.html', user=user)
+    posts = Post.query.filter_by(user_id=user.id).all()
+    return render_template('user.html', user=user, posts=posts)
 
 
 @app.route('/delete-users/<int:page>', methods=["GET", "POST"])
