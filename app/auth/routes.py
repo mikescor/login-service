@@ -4,30 +4,16 @@ from werkzeug.urls import url_parse
 
 from app import create_app, db
 from app.auth import bp
-from app.auth.forms import LoginForm, RegistrationForm, PostForm
+from app.auth.forms import LoginForm, RegistrationForm
 from app.models import User, Post
 
 app = create_app()
 
 
-@bp.route('/', methods=['GET', 'POST'])
-@bp.route('/index', methods=['GET', 'POST'])
-@login_required
-def index():
-    form = PostForm()
-    if form.validate_on_submit():
-        post = Post(body=form.post.data, author=current_user)
-        db.session.add(post)
-        db.session.commit()
-        flash('Your post is now live!')
-        return redirect(url_for('auth.index'))
-    return render_template('index.html', title='Home', form=form)
-
-
 @bp.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('auth.index'))
+        return redirect(url_for('main.index'))
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
@@ -45,7 +31,7 @@ def login():
 @bp.route('/logout')
 def logout():
     logout_user()
-    return redirect(url_for('auth.index'))
+    return redirect(url_for('main.index'))
 
 
 @bp.route('/registration', methods=['GET', 'POST'])
