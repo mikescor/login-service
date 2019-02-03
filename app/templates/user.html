@@ -1,15 +1,28 @@
 {% extends "base.html" %}
 
-{% block content %}
-    <h1>User: {{ user.username }}</h1>
-    <hr>
-
+{% block app_content %}
+    <table class="table table-hover">
+        <tr>
+            <td>
+                <h1>User: {{ user.username }}</h1>
+            </td>
+        </tr>
+    </table>
     {% for post in posts %}
-        <p>
-            {{ post.author.username }} says: <b>{{ post.body }}</b>
-        </p>
+        {% include '_post.html' %}
     {% endfor %}
-
-    <p>Add new user <a href="{{ url_for('auth.registration') }}">Click to Register!</a></p>
-    <p>Delete an user <a href="{{ url_for('auth.delete_users', page=1) }}">Click to delete!</a></p>
+    <nav aria-label="...">
+        <ul class="pager">
+            <li class="previous{% if not prev_url %} hidden {% endif %}">
+                <a href="{{ prev_url or '#' }}">
+                    <span aria-hidden="true">&larr;</span> Newer posts
+                </a>
+            </li>
+            <li class="next{% if not next_url %} hidden {% endif %}">
+                <a href="{{ next_url or '#' }}">
+                    Older posts <span aria-hidden="true">&rarr;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
 {% endblock %}
