@@ -23,6 +23,14 @@ $ git clone https://github.com/mikescor/login-service
 ```
 ##### Note
 [Info about postgresql](https://www.postgresql.org/docs/10/static/manage-ag-createdb.html)
+
+* *Install [elasticsearch](https://www.elastic.co/guide/en/elasticsearch/reference/current/install-elasticsearch.html) on your computer*
+
+* *Add elasticsearch path:*
+```
+(venv) ~/login-service $ export ELASTICSEARCH_URL=http://localhost:9200
+```
+
 * *Apply migrations:*
 ```
 (venv) ~/login-service $ flask db upgrade
@@ -34,3 +42,4 @@ $ git clone https://github.com/mikescor/login-service
 ## Technology stack
 * [Flask](http://flask.pocoo.org/docs/1.0/)
 * [Postgresql](https://www.postgresql.org/docs/10/static/intro-whatis.html)
+* [Elasticsearch](https://www.elastic.co/products/elasticsearch) 
